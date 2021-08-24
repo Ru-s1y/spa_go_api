@@ -1,14 +1,16 @@
 version: '3'
 services:
-  web:
+  api:
     build: ./Docker/go
     ports:
       - "8080:8080"
     tty: true
     volumes:
       - ./backend:/go/src/work
+    command: sh -c "go run *.go"
     depends_on:
       - db
+
   db:
     build: ./Docker/postgres
     ports:
@@ -20,3 +22,11 @@ services:
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
       - ./Docker/postgres/setup:/usr/local/src
+
+  web:
+    build: ./Docker/react
+    volumes:
+      - ./frontend/:/usr/src/app
+    command: sh -c "cd web && npm start"
+    ports:
+      - "3000:3000"

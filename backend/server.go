@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"path"
 	"strconv"
+	"fmt"
 )
 
 type Post struct {
@@ -43,7 +44,8 @@ func handlePost(w http.ResponseWriter, r *http.Request) {
 // Retrieve a post
 // GET /post/1
 func getPost(w http.ResponseWriter, r *http.Request) (err error) {
-	id, err := strconv.Atoi(path.Base(r.URL.Path))
+	// id, err := strconv.Atoi(path.Base(r.URL.Path))
+	id, err := strconv.Atoi(r.FormValue("post_id"))
 	if err != nil {
 		return
 	}
