@@ -2,17 +2,21 @@ version: '3'
 services:
   web:
     build: ./Docker/go
+    ports:
+      - "8080:8080"
     tty: true
     volumes:
       - ./backend:/go/src/work
     depends_on:
       - db
   db:
-    image: postgres
+    build: ./Docker/postgres
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
+      - ./Docker/postgres/setup:/usr/local/src
