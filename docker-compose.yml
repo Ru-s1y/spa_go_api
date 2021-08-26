@@ -32,6 +32,7 @@ services:
       - ./frontend:/var/www/html
     depends_on:
       - php
+      - redis
 
   php:
     build: ./Docker/php
@@ -39,6 +40,9 @@ services:
       - ./frontend:/var/www/html
     depends_on:
       - mysql
+    environment:
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
 
   mysql:
     image: mysql:5.7
@@ -55,3 +59,9 @@ services:
       - "8888:80"
     depends_on:
       - db
+
+  redis:
+    image: redis:latest
+    command: redis-server
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"

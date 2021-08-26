@@ -1,2 +1,4 @@
 <?php
-  phpinfo();
+    require_once("./src/session.php");
+
+    phpinfo();
