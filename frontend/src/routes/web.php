@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/session', function() {
+    session(['foo' => 'こんにちはこんにちは']);
+    return session('foo');
+});

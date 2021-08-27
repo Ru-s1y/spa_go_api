@@ -20,7 +20,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - ./data/psql:/var/lib/postgresql/data
       - ./Docker/postgres/setup:/usr/local/src
 
   nginx:
@@ -54,7 +54,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql/data:/var/lib/mysql
+      - ./data/mysql:/var/lib/mysql
       - ./Docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./Docker/mysql/sql:/var/local/src/sql
     environment:
@@ -72,6 +72,9 @@ services:
 
   redis:
     image: redis:latest
-    command: redis-server
+    container_name: redis
+    command: redis-server --appendonly yes
     ports:
       - "${REDIS_PORT}:${REDIS_PORT}"
+    volumes:
+      - ./data/redis:/data
