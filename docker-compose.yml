@@ -38,20 +38,27 @@ services:
     build: ./Docker/php
     volumes:
       - ./frontend:/var/www/html
-    depends_on:
-      - mysql
     environment:
       REDIS_PORT: ${REDIS_PORT}
       REDIS_PASSWORD: ${REDIS_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    depends_on:
+      - mysql
 
   mysql:
-    image: mysql:5.7
+    build: ./Docker/mysql
     ports:
       - "3306:3306"
     volumes:
       - ./mysql/data:/var/lib/mysql
+      - ./Docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
