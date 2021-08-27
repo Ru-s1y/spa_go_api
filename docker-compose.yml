@@ -73,7 +73,7 @@ services:
   redis:
     image: redis:latest
     container_name: redis
-    command: redis-server --appendonly yes
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
     ports:
       - "${REDIS_PORT}:${REDIS_PORT}"
     volumes:
