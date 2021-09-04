@@ -1,0 +1,7 @@
+.has-error {
+  border: solid 1px red;
+}
+
+.help-block{
+  color: red;
+}

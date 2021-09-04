@@ -21,11 +21,11 @@ Route::get('/session', function() {
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/post', 'User\PostController@show')->name('post.show');
+Route::group(['prefix' => '/', 'user.', 'namespace' => 'User'], function () {
+    Route::get('/post', 'PostController@index')->name('post.index');
+    Route::get('/post/create', 'PostController@create')->name('post.create');
+    Route::get('/post/{id}', 'PostController@show')->name('post.show');
+    Route::post('/post', 'PostController@store')->name('post.store');
+});

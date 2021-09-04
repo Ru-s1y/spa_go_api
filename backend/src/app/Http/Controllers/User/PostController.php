@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use Auth;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -16,8 +15,19 @@ class PostController extends Controller
         $this->post = $post;
     }
 
-    public function show() {
-        var_dump($this->post);
+    public function index(Request $request) {
+        return view('user.posts.index');
+    }
+
+    public function show(Request $request) {
         return view('user.posts.show');
+    }
+
+    public function create() {
+        return view('user.posts.create');
+    }
+
+    public function store(Request $request) {
+        return redirect()->route('post.index');
     }
 }
