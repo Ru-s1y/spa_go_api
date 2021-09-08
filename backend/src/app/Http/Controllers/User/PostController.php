@@ -16,7 +16,8 @@ class PostController extends Controller
     }
 
     public function index(Request $request) {
-        return view('user.posts.index');
+        $posts = $this->post->getPosts();
+        return view('user.posts.index', compact('posts'));
     }
 
     public function show(Request $request) {

@@ -5,3 +5,14 @@
 .help-block{
   color: red;
 }
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.time-stamp {
+  font-size: 10px;
+  color: lightgray;
+}
