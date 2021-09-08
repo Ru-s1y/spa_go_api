@@ -30,4 +30,13 @@ class PostController extends Controller
     public function store(Request $request) {
         return redirect()->route('post.index');
     }
+
+    public function edit($postId) {
+        $post = $this->post->find($postId);
+        return view('user.posts.edit', compact('post'));
+    }
+
+    public function update() {
+        return redirect()->route('post.index');
+    }
 }
